@@ -4,7 +4,7 @@ import Login from '../components/template/Login';
 const LoginPage = () => {
     return (
         
-            <div className='flex w-screen h-screen'>
+            <div className='flex w-full h-screen'>
         <div className='w-full flex items-center justify-center lg:w-1/2'>
         <Login></Login>
         </div>
