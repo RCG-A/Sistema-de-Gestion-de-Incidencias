@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Routes, redirect } from "react-router-d
 import RouteProteccion from './routes/RouteProteccion.jsx'
 import Navbar from './components/navbar.jsx'
 import Sidebar from './components/sidebar.jsx'
+import Incidencia from './components/template/Incidencia'
+import IncidenciaC from './components/container/Incidencia'
 const  App = () => {
   const loged = true
   return (
@@ -25,7 +27,7 @@ const  App = () => {
       
         <Route
           element={<RouteProteccion isLogin={!loged} redirectTo='/' />} >
-          <Route path='/home' element={<Home></Home>}></Route>
+          <Route path='/home' element={<IncidenciaC></IncidenciaC>}></Route>
         </Route>
         <Route
           element={<RouteProteccion isLogin={loged} redirectTo='/home' />} >
