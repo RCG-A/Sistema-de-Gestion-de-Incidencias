@@ -8,7 +8,7 @@ const Incidencia = () => {
                 <div className='flex'>
                     <div className='items-center mr-4'>
                          <label className='text-cyan-50 text-lg'>#TKT</label>
-                        <input placeholder='# de Ticket' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent text-cyan-50' />
+                        <input placeholder='# de ticket' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent text-cyan-50' />
                         <label className='text-cyan-50 text-lg'>Usuario Solicitante</label>
                         <input placeholder='Usuario Solicitante' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent text-cyan-50' />
                         <label className='text-cyan-50 text-lg'>Usuario Afectado</label>

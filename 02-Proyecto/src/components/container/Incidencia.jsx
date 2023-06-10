@@ -5,8 +5,8 @@ const IncidenciaC = () => {
     return (
         <div className='flex w-full max-h-full'>
         <div className='w-full flex items-center justify-center'>
-        <Incidencia></Incidencia>
-        </div>  
+  <Incidencia></Incidencia>
+        </div>
             </div>
     );
 }

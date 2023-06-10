@@ -27,7 +27,10 @@ const  App = () => {
       
         <Route
           element={<RouteProteccion isLogin={!loged} redirectTo='/' />} >
-          <Route path='/home' element={<IncidenciaC></IncidenciaC>}></Route>
+          <Route path='/home' element={<Home></Home>}></Route>
+          <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
+          <Route path='/home' element={<Home></Home>}></Route>
+          
         </Route>
         <Route
           element={<RouteProteccion isLogin={loged} redirectTo='/home' />} >

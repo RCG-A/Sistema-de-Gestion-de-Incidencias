@@ -1,13 +1,16 @@
 import React from 'react';
 import Navbar from '../components/navbar';
 import Sidebar from '../components/sidebar';
+import Incidencia from '../components/template/Incidencia';
 
 const Home = () => {
     return (
-        <div>
-        <h2>Hola mundo</h2>
-        </div>
-    );
+        <div className='bg-yellow-100 w-screen'>
+        <div className=''>
+
+        </div>  
+            </div>
+        );
 }
 
 export default Home;
