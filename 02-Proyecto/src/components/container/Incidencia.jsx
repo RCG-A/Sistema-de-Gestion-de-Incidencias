@@ -7,7 +7,7 @@ const IncidenciaC = () => {
         <div className='w-full flex items-center justify-center'>
   <Incidencia></Incidencia>
         </div>
-            </div>
+        </div>
     );
 }
 

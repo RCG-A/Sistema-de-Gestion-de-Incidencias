@@ -36,7 +36,7 @@ const Incidencia = () => {
                         <input placeholder='Usuario asignado' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent text-cyan-50' />
                         <label className='text-cyan-50 text-lg'>Fecha</label>
                         <input placeholder='Fecha' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent text-cyan-50' />
-                        <label className='text-cyan-50 text-lg'>Brebe descripcion</label>
+                        <label className='text-cyan-50 text-lg'>Breve descripcion</label>
                         <input placeholder='Brebe descripcion' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent text-cyan-50' />
                         <label className='text-cyan-50 text-lg'>Descripcion</label>
                         <textarea placeholder='Descripcion' type='text' className='w-11/12 border-2 rounded-lg m-2 bg-transparent text-cyan-50' ></textarea>

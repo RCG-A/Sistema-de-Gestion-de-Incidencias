@@ -40,3 +40,24 @@
 .read-the-docs {
   color: #888;
 }
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #656565;
+}
+th {
+  background-color: #767676;
+}
+tr:hover {
+  background-color: #818181;
+}
+.table-container{
+  max-width: 60rem;
+  overflow-x: scroll;
+}
