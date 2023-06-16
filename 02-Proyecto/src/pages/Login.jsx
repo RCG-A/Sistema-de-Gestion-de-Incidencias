@@ -11,7 +11,7 @@ const LoginPage = () => {
         <div className='hidden lg:w-1/2 lg:flex h-full  items-center justify-center bg-gray-200 '>
         <div className='w-80 h-10 bg-gradient-to-tr from-black to-white rounded-full '></div>
         <div>
-        <img src='https://www.whistlercreeksidevillage.com/wp-content/uploads/2020/05/Scotia-copy.png'/>
+        <img src='https://maanimo.mx/wp-content/uploads/2020/04/scotiabank-icon-mx.png' style={{width:"38rem"}}/>
       </div>
         </div>  
             </div>

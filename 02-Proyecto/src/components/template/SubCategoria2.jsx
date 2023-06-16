@@ -1,13 +1,12 @@
 import React,{ useState } from 'react';
 import axios from 'axios';
-const Categoria = () => {
+const SubCategoria2 = () => {
 
     const [name, setname] = useState("")
 
     const [description, setdescription] = useState("")
 
-    const createCategories = async (e)=>{
-        e.preventDefault()
+    const createCategories = async (name, description)=>{
         let body = {
             name: name,
             description: description
@@ -17,8 +16,8 @@ const Categoria = () => {
     
 
     return (
-        <div className='bg-gray-900 w-2/3 justify-center items-center p-10 rounded-2xl'>
-        <h1 className='text-zinc-50 text-4xl justify-center mb-5'>Crear categoria</h1>
+        <div className='bg-gray-900 w-2/3  justify-center items-center p-10 rounded-2xl '>
+        <h1 className='text-zinc-50 text-4xl justify-center '>Sub Categoria 2</h1>
         <form onSubmit={createCategories}>
         <div className='items-center flex flex-col'>
                 <label className='text-cyan-50 text-lg'>Nombre de categoria</label>
@@ -28,7 +27,12 @@ const Categoria = () => {
                 <label className='text-cyan-50 text-lg'>Descripcion</label>
                 <input value={description} onChange={(e)=>setdescription(e.target.value)} placeholder='Descripcion' type='text' className='w-1/2 border-2 rounded-lg p-1.5 m-2 bg-transparent text-cyan-50' />
             </div>
-            <button type='submit' className='bg-white mt-2 hover:bg-stone-50'>Crear Categoria</button>
+            <div className='items-center flex flex-col'>
+                <label className='text-cyan-50 text-lg'> Sub Categoria</label>
+  
+                <input value={description} onChange={(e)=>setdescription(e.target.value)} placeholder='Descripcion' type='text' className='w-1/2 border-2 rounded-lg p-1.5 m-2 bg-transparent text-cyan-50' />
+            </div>
+            <button type='submit' className='bg-white mt-2 hover:bg-stone-50'>Crear Sub Categoria</button>
            
         </form>
 
@@ -36,4 +40,4 @@ const Categoria = () => {
         );
 }
 
-export default Categoria;
+export default SubCategoria2;

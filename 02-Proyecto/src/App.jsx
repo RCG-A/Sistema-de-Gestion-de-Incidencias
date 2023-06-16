@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React,{ useState } from 'react'
 import './App.css'
 import Home from './pages/home'
 import LoginPage from './pages/Login'
@@ -16,15 +16,15 @@ import CrearRol from './components/container/Crear-Rol'
 import CrearArea from './components/container/Crear-Area'
 import CrearCategoria from './components/container/Crear-Categoria'
 const  App = () => {
-  const loged = true
+  const loged = false
   return (
     <>
     <Router>
-{loged? (<Navbar></Navbar>):(<></>) }
+{localStorage.getItem("TOKEN")? (<Navbar></Navbar>):(<></>) }
     
   <div className='flex'>
   
-{loged? (<Sidebar></Sidebar>):(<></>) }
+{localStorage.getItem("TOKEN")? (<Sidebar></Sidebar>):(<></>) }
     
       <Routes>
 
@@ -32,7 +32,7 @@ const  App = () => {
       
       
         <Route
-          element={<RouteProteccion isLogin={!loged} redirectTo='/' />} >
+          element={<RouteProteccion isLogin={!localStorage.getItem("TOKEN")} redirectTo='/' />} >
           <Route path='/home' element={<Home></Home>}></Route>
           <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
           <Route path='/incidencia-asignada-a-mi' element={<IncidenciasLista></IncidenciasLista>}></Route>
@@ -45,7 +45,7 @@ const  App = () => {
           
         </Route>
         <Route
-          element={<RouteProteccion isLogin={loged} redirectTo='/home' />} >
+          element={<RouteProteccion isLogin={localStorage.getItem("TOKEN")} redirectTo='/home' />} >
           <Route path='/' element={<LoginPage></LoginPage>}></Route>
         </Route>
 
