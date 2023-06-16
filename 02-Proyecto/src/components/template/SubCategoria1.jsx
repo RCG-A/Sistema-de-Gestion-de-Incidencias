@@ -13,9 +13,9 @@ useEffect(() => {
     const createCategories = async (e)=>{
         e.preventDefault()
         let body = {
-            idCategory: 1,
-            name: "name",
-            description: "description"
+            categoriesId: idcategoria.current.value,
+            name: name,
+            description: description
         }
         await axios.post("http://localhost:4000/subcategories1", body)
     }
@@ -37,12 +37,12 @@ useEffect(() => {
         <h1 className='text-zinc-50 text-4xl justify-center w-full '>Sub Categoria 1</h1>
         <form onSubmit={createCategories}>
         <div className='items-center flex flex-col'>
-                <label className='text-cyan-50 text-lg'>Nombre de categoria</label>
-                <input value={name} onChange={(e)=>setname( e.target.value)} placeholder='Categoria' type='text' className='w-1/2 border-2 rounded-lg p-1.5 m-2 bg-transparent text-cyan-50' />
+                <label className='text-cyan-50 text-lg'>Nombre de sub categoria 1</label>
+                <input value={name} onChange={(e)=>setname( e.target.value)} placeholder='Categoria' type='text' className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-cyan-50' />
             </div>
             <div className='items-center flex flex-col'>
                 <label className='text-cyan-50 text-lg'>Descripcion</label>
-                <input value={description} onChange={(e)=>setdescription(e.target.value)} placeholder='Descripcion' type='text' className='w-1/2 border-2 rounded-lg p-1.5 m-2 bg-transparent text-cyan-50' />
+                <input value={description} onChange={(e)=>setdescription(e.target.value)} placeholder='Descripcion' type='text' className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-cyan-50' />
             </div>
             <div className='items-center flex flex-col'>
                 <label className='text-cyan-50 text-lg'> Categoria</label>

@@ -8,10 +8,10 @@ const CrearCategoria = () => {
         
                    <div className='w-screen bg-red-500 justify-center p-3'>
         <div className='flex items-center justify-center gap-8'>
-        
-        <SubCategoria2></SubCategoria2>
-        <SubCategoria></SubCategoria>
         <Categoria></Categoria>
+        <SubCategoria></SubCategoria>
+        <SubCategoria2></SubCategoria2>
+        
         </div>  
             </div> 
         
