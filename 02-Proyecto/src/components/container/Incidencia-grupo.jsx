@@ -9,20 +9,19 @@ const IncidenciaGrupo = () => {
 
                     <thead>
                         <tr>
-                            <th> #TKT</th>
+                        <th> #TKT</th>
                             <th>Usuario Solicitante</th>
                             <th>Usuario Afectado</th>
-                            <th>AREA</th>
+                            <th>Compañia</th>
                             <th>Categoria</th>
                             <th>Sub-Categoria 1</th>
                             <th>Sub-Categoria 2</th>
-                            <th>Sub-Categoria 3</th>
-                            <th>Sub-Categoria 4</th>
-                            <th>Estado</th>
                             <th>Area Asignada</th>
-                            <th>Fecha</th>
+                            <th>Usuario Asignado</th>
                             <th>Brebe descripcion</th>
                             <th>Descripcion</th>
+                            <th>Intervencion</th>
+                                                        
 
                         </tr>
                     </thead>

@@ -3,9 +3,14 @@ import axios from 'axios';
 import { GetArea } from '../../services/AxiosArea';
 import { GetAllCategories, GetAllSubCategories1, GetAllSubCategories2 } from '../../services/AxiosCategories';
 import { GetUser } from '../../services/AxiosUser';
+import { useParams } from 'react-router-dom';
 
-const Incidencia = () => {
 
+const EditIncidencia = () => {
+
+    useEffect(()=>{
+        GetIncidencia()
+    }, [])
     useEffect(() => {
         GetAllUsers()
     }, []);
@@ -31,8 +36,31 @@ const Incidencia = () => {
     const [company, setcompany] = useState("")
     const [briefDescription, setbriefDescription] = useState("")
     const [description, setdescription] = useState("")
-    const [historic, sethistoric] = useState("")
-
+    const [user, setuser] = useState(null)
+    const [affectedUser, setaffectedUser] = useState(null)
+    const [assignmentGroup, setassignmentGroup] = useState(null)
+    const [categories, setcategories] = useState(null)
+    const [subcategories1Default, setsubcategories1Default] = useState(null)
+    const [subcategories2Default, setsubcategories2Default] = useState(null)
+    const [brebe, setbrebe] = useState("")
+    const GetIncidencia = async ()=>{
+        const response = await axios.get(`http://localhost:4000/incidents/`+id) 
+        setnumTK(response.data.numTK),
+        setcompany(response.data.company),
+        setaffectedUser(response.data.affectedUserId),
+        setuser(response.data.requestingUserId),
+        setassignmentGroup(response.data.assignmentGroupId)
+        setcategories(response.data.categoriesId)
+        setsubcategories1Default(response.data.subcategories1)
+        setsubcategories2Default(response.data.subcategories2)
+        setdescription(response.data.description)
+        setbriefDescription(response.data.briefDescription)
+        
+        
+       
+        
+       
+}
     //useRef
     const userID = useRef(null)
     const affectedUserId = useRef(null)
@@ -42,7 +70,8 @@ const Incidencia = () => {
     const assignmentGroupId = useRef(null)
     const assignedUserId = useRef(null)
 
-    const createIncidencia = async (e) => {
+    const {id} = useParams()
+    const UpdateIncidencia = async (e) => {
         e.preventDefault()
         let body = {
             numTK: numTK,
@@ -58,20 +87,24 @@ const Incidencia = () => {
             description: description,
             historic: "historic"
         }
-        await axios.post("http://localhost:4000/incidents/", body)
+        await axios.patch(`http://localhost:4000/incidents/`+id, body)
     }
 
     /// OBTENCION DE DATOS
     const [users, setusers] = useState([])
+    const [usersSol, setusersSol] = useState([])
+    
     const [area, setarea] = useState([])
     const [categoria, setcategoria] = useState([])
     const [subcategories1, setsubcategories1] = useState([])
     const [subcategories2, setsubcategories2] = useState([])
 
+
     const GetAllUsers = () => {
         GetUser()
             .then((response) => {
                 setusers(response.data)
+                setusersSol(response.data)
                 console.log(users);
             })
             .catch((error) => {
@@ -130,28 +163,29 @@ const Incidencia = () => {
     return (
         <div className='bg-gray-900  justify-center items-center p-5'>
             <h2 className='text-zinc-50 text-4xl justify-center mb-5'>Incidencia</h2>
-            <form onSubmit={createIncidencia}>
+            <form onSubmit={UpdateIncidencia}>
                 <div className='flex'>
                     <div className='items-center mr-4'>
                         <label className='text-cyan-50 text-lg'>#TKT</label>
-                        <input value={numTK} onChange={(e) => setnumTK(e.target.value)} placeholder='# de ticket' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent pl-2 text-cyan-50' />
+                        <input disabled value={numTK} onChange={(e) => setnumTK(e.target.value)} placeholder='# de ticket' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent pl-2 text-cyan-50' />
 
                         
                         <label className='text-cyan-50 text-lg'>Usuario Afectado</label>
-                        <select className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={affectedUserId}>
+                        <select disabled  className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={affectedUserId}>
+                                                     
                             {users.map((users, i) => (
-                                <option key={i} USER={() => GetUser(users.id)} value={users.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
-                                {users.name} {users.role.name}  {users.email} 
+                                <option selected={users.id == affectedUser}  key={i} USER={() => GetUser(users.id)} value={users.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
+                                {users.name} - {users.role.name} - {users.email} - { users.id}
                                 </option>
                             ))}
                         </select>
                         <label className='text-cyan-50 text-lg'>Compañia</label>
-                        <input value={company} onChange={(e) => setcompany(e.target.value)} placeholder='Compañia' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent pl-2 text-cyan-50' />
+                        <input disabled value={company} onChange={(e) => setcompany(e.target.value)} placeholder='Compañia' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent pl-2 text-cyan-50' />
 
                         <label className='text-cyan-50 text-lg'>Categoria</label>
                         <select className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={categoriesId}>
                             {categoria.map((categoria, i) => (
-                                <option key={i} USER={() => GetUser(categoria.id)} value={categoria.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
+                                <option selected={categoria.id == categories} key={i} USER={() => GetUser(categoria.id)} value={categoria.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
                                     {categoria.name}
                                 </option>
                             ))}
@@ -159,33 +193,33 @@ const Incidencia = () => {
                         <label className='text-cyan-50 text-lg'>Sub-Categoria 1</label>
                         <select className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={subcategories1ID}>
                             {subcategories1.map((subcategories1, i) => (
-                                <option key={i} USER={() => GetUser(subcategories1.id)} value={subcategories1.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
-                                    {subcategories1.name}
+                                <option selected={subcategories1.id == subcategories1Default} key={i} USER={() => GetUser(subcategories1.id)} value={subcategories1.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
+                                    {subcategories1.name} 
                                 </option>
                             ))}
                         </select>
                         <label className='text-cyan-50 text-lg'>Sub-Categoria 2</label>
                         <select className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={subcategories2ID}>
                             {subcategories2.map((subcategories2, i) => (
-                                <option key={i} USER={() => GetUser(subcategories2.id)} value={subcategories2.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
-                                    {subcategories2.name}
+                                <option selected= {subcategories2.id == subcategories2Default } key={i} USER={() => GetUser(subcategories2.id)} value={subcategories2.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
+                                    {subcategories2.name} {subcategories2.id}
                                 </option>
                             ))}
                         </select>  </div>
                     <div className='items-center'>
                     <label className='text-cyan-50 text-lg'>Usuario Solicitante</label>
-                        <select className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={userID}>
-                            {users.map((users, i) => (
-                                <option key={i} USER={() => GetUser(users.id)} value={users.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
-                                {users.name} {users.role.name}  {users.email} 
+                        <select disabled className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={userID}>
+                            {usersSol.map((usersSol, i) => (
+                                <option selected ={usersSol.id == user} key={i} USER={() => GetUser(usersSol.id)} value={usersSol.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
+                                {usersSol.name} {usersSol.role.name}  {usersSol.email} {usersSol.id} 
                                 </option>
                             ))}
                         </select>
                         <label className='text-cyan-50 text-lg'>Grupo/Area asignado</label>
                         <select className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={assignmentGroupId}>
                             {area.map((area, i) => (
-                                <option key={i} USER={() => GetUser(area.id)} value={area.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
-                                    {area.name}
+                                <option selected={area.id == assignmentGroup} key={i} USER={() => GetUser(area.id)} value={area.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
+                                    {area.name} 
                                 </option>
                             ))}
                         </select>
@@ -215,4 +249,4 @@ const Incidencia = () => {
     );
 }
 
-export default Incidencia;
+export default EditIncidencia;

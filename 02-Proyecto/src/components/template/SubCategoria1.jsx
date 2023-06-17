@@ -10,6 +10,7 @@ const SubCategoria = () => {
 useEffect(() => {
     GetCategories()
 }, []);
+
     const createCategories = async (e)=>{
         e.preventDefault()
         let body = {

@@ -15,6 +15,8 @@ import CrearUsuario from './components/container/Crear-Usuario'
 import CrearRol from './components/container/Crear-Rol'
 import CrearArea from './components/container/Crear-Area'
 import CrearCategoria from './components/container/Crear-Categoria'
+import EditIncidencia from './components/template/EditIncidencia'
+import IncidenciaE from './components/container/Editar-Incidencia'
 const  App = () => {
   const loged = false
   return (
@@ -41,6 +43,7 @@ const  App = () => {
           <Route path='/crear-rol' element={<CrearRol></CrearRol>}></Route>
           <Route path='/crear-area' element={<CrearArea></CrearArea>}></Route>
           <Route path='/crear-categoria' element={<CrearCategoria></CrearCategoria>}></Route>
+          <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
           
           
         </Route>
