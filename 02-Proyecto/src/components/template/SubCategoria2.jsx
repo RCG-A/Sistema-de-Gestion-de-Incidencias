@@ -18,6 +18,19 @@ const SubCategoria2 = () => {
             description: description
         }
         await axios.post("http://localhost:4000/subcategories2/", body)
+        .then((res)=>{
+            if(res.data.response){
+    
+                alert(res.data.response)
+            }else{
+                alert("Sub-Categoria 2 Creada Exitosamente")
+            }
+                
+            }
+             
+           )
+           .catch((error)=> {alert(error)})
+        
     }
     
     const GetCategories = () => {

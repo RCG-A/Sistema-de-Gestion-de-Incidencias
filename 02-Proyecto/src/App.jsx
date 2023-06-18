@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import Home from './pages/home'
 import LoginPage from './pages/Login'
@@ -17,46 +17,142 @@ import CrearArea from './components/container/Crear-Area'
 import CrearCategoria from './components/container/Crear-Categoria'
 import EditIncidencia from './components/template/EditIncidencia'
 import IncidenciaE from './components/container/Editar-Incidencia'
-const  App = () => {
-  const loged = false
+import { GetDetailsUser } from './services/AxiosUser'
+import ErrorPage from './pages/ErrorPage'
+const App = () => {
+
+
+  const [Name, setName] = useState(null)
+  const [lastname, setlastname] = useState("");
+  const id = localStorage.getItem("RoleId")
+  const idINT = parseInt(id)
+
+  function Rutas() {
+    switch (idINT) {
+      case 1:
+        return (  <Routes>
+          <Route            element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
+            <Route path='/home' element={<Home></Home>}></Route>
+            <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
+            <Route path='/incidencia-asignada-a-mi' element={<IncidenciasLista></IncidenciasLista>}></Route>
+            <Route path='/incidencia-asignada-a-mi-grupo' element={<IncidenciaGrupo></IncidenciaGrupo>}></Route>
+            <Route path='/crear-usuario' element={<CrearUsuario></CrearUsuario>}></Route>
+            <Route path='/crear-rol' element={<CrearRol></CrearRol>}></Route>
+            <Route path='/crear-area' element={<CrearArea></CrearArea>}></Route>
+            <Route path='/crear-categoria' element={<CrearCategoria></CrearCategoria>}></Route>
+            <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
+          </Route>
+          <Route
+            element={<RouteProteccion isAllow={!localStorage.getItem("TOKEN")} redirectTo='/crear-incidencia' />} >
+            <Route path='/' element={<LoginPage></LoginPage>}></Route>
+          </Route>
+
+        </Routes>)
+        break;
+      case 2:
+        return (  <Routes>
+
+
+          <Route            element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
+      
+            
+            <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
+            <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
+          </Route>
+
+
+          <Route
+            element={<RouteProteccion isAllow={!localStorage.getItem("TOKEN")} redirectTo='/crear-incidencia' />} >
+            <Route path='/' element={<LoginPage></LoginPage>}></Route>
+          </Route>
+
+        </Routes>)
+        break;
+      case 3:
+        return (  <Routes>
+
+
+          <Route
+            element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
+      
+            <Route path='/home' element={<Home></Home>}></Route>
+            <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
+            <Route path='/incidencia-asignada-a-mi-grupo' element={<IncidenciaGrupo></IncidenciaGrupo>}></Route>
+            <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
+          </Route>
+
+
+          <Route
+            element={<RouteProteccion isAllow={!localStorage.getItem("TOKEN")} redirectTo='/crear-incidencia' />} >
+            <Route path='/' element={<LoginPage></LoginPage>}></Route>
+          </Route>
+
+        </Routes>)
+        break;
+      case 4:
+        return (  <Routes>
+
+
+          <Route            element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
+      
+            <Route path='/home' element={<Home></Home>}></Route>
+            <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
+            <Route path='/incidencia-asignada-a-mi' element={<IncidenciasLista></IncidenciasLista>}></Route>
+            <Route path='/incidencia-asignada-a-mi-grupo' element={<IncidenciaGrupo></IncidenciaGrupo>}></Route>
+            <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
+          </Route>
+
+
+          <Route
+            element={<RouteProteccion isAllow={!localStorage.getItem("TOKEN")} redirectTo='/crear-incidencia' />} >
+            <Route path='/' element={<LoginPage></LoginPage>}></Route>
+          </Route>
+
+        </Routes>)
+        break;
+      default:
+        return (  <Routes>
+
+
+          <Route 
+          element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
+      
+            <Route path='/home' element={<Home></Home>}></Route>
+            <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
+            <Route path='/incidencia-asignada-a-mi' element={<IncidenciasLista></IncidenciasLista>}></Route>
+            <Route path='/incidencia-asignada-a-mi-grupo' element={<IncidenciaGrupo></IncidenciaGrupo>}></Route>
+            <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
+          </Route>
+
+
+          <Route
+            element={<RouteProteccion isAllow={!localStorage.getItem("TOKEN")} redirectTo='/crear-incidencia' />} >
+            <Route path='/' element={<LoginPage></LoginPage>}></Route>
+          </Route>
+
+        </Routes>)
+        break;
+    }
+  }
+
+
+
+
+
   return (
     <>
-    <Router>
-{localStorage.getItem("TOKEN")? (<Navbar></Navbar>):(<></>) }
-    
-  <div className='flex'>
-  
-{localStorage.getItem("TOKEN")? (<Sidebar></Sidebar>):(<></>) }
-    
-      <Routes>
+      <Router >
+        {localStorage.getItem("TOKEN") ? (<Navbar></Navbar>) : (<></>)}
 
-  
-      
-      
-        <Route
-          element={<RouteProteccion isLogin={!localStorage.getItem("TOKEN")} redirectTo='/' />} >
-          <Route path='/home' element={<Home></Home>}></Route>
-          <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
-          <Route path='/incidencia-asignada-a-mi' element={<IncidenciasLista></IncidenciasLista>}></Route>
-          <Route path='/incidencia-asignada-a-mi-grupo' element={<IncidenciaGrupo></IncidenciaGrupo>}></Route>
-          <Route path='/crear-usuario' element={<CrearUsuario></CrearUsuario>}></Route>
-          <Route path='/crear-rol' element={<CrearRol></CrearRol>}></Route>
-          <Route path='/crear-area' element={<CrearArea></CrearArea>}></Route>
-          <Route path='/crear-categoria' element={<CrearCategoria></CrearCategoria>}></Route>
-          <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
-          
-          
-        </Route>
-        <Route
-          element={<RouteProteccion isLogin={localStorage.getItem("TOKEN")} redirectTo='/home' />} >
-          <Route path='/' element={<LoginPage></LoginPage>}></Route>
-        </Route>
+        <div className='flex'>
 
-      </Routes>
-    
-    </div>
-</Router>
-</>
+          {localStorage.getItem("TOKEN") ? (<Sidebar></Sidebar>) : (<></>)}
+
+         {Rutas()}
+        </div>
+        
+      </Router>
+    </>
   )
 }
 

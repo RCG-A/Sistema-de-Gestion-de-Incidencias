@@ -242,7 +242,7 @@ const EditIncidencia = () => {
                     <label className='text-cyan-50 text-lg'>Historico</label>
                     <input placeholder=''></input>
                 </div>
-                <button type='submit' className='bg-white mt-2 hover:bg-stone-50'>Crear Incidencia</button>
+                <button type='submit' className='bg-white mt-2 hover:bg-stone-50'>Actualizar Incidencia</button>
             </form>
 
         </div>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { GetAllIncidencia } from '../../services/AxionIncidencia';
 import { GetDetailsUser } from '../../services/AxiosUser';
 import {Link} from "react-router-dom"
-const IncidenciaAsignada = () => {
+const IncidenciaAsignadaGrupo = () => {
 
     const [Incidencia, setIncidencia] = useState([]);
     const [User, setUser] = useState([])
@@ -36,7 +36,7 @@ const IncidenciaAsignada = () => {
 
         <>
             {Incidencia
-            .filter((Incidencia)=> Incidencia.assignedUserId == localStorage.getItem("Id"))
+            .filter(Incidencia => Incidencia.assignmentGroupId == localStorage.getItem("assignmentGroupId"))
             .map((Incidencia, index) =>
             (
                 
@@ -111,4 +111,4 @@ const IncidenciaAsignada = () => {
     );
 }
 
-export default IncidenciaAsignada;
+export default IncidenciaAsignadaGrupo;

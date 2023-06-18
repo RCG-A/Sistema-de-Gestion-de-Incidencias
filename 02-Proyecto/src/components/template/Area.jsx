@@ -13,6 +13,19 @@ const Area = () => {
             description: description
         }
        await axios.post(`http://localhost:4000/assignment-group/`, body)
+       .then((res)=>{
+        if(res.data.response){
+
+            alert(res.data.response)
+        }else{
+            alert("Area Creada Exitosamente")
+        }
+            
+        }
+         
+       )
+       .catch((error)=> {alert(error)})
+    
     }
 
 

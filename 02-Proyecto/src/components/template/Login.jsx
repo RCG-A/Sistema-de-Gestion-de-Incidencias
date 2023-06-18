@@ -16,7 +16,7 @@ const [isLoged, setisLoged] = useState(localStorage.getItem("TOKEN"));
                 localStorage.setItem("Id", JSON.stringify(response.data.user.id))
                 localStorage.setItem("Nombre", JSON.stringify(response.data.user.name))
                 localStorage.setItem("RoleId", JSON.stringify(response.data.user.roleId))
-                
+                localStorage.setItem("assignmentGroupId", JSON.stringify(response.data.user.assignmentGroupId))
                
             } else {
                 alert("Usuario y/o contraseña incorrecta");

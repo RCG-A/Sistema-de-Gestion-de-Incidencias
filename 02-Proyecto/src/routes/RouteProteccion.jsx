@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link, Navigate, redirect, Outlet} from "react-router-dom"
-const RouteProteccion = ({children, isLogin, redirectTo="/"}) => {
+const RouteProteccion = ({children, isAllow, redirectTo="/"}) => {
    
-   if (isLogin) {
+   if (!isAllow) {   
     return <Navigate to={redirectTo}></Navigate>
 }else{
     return children? children: <Outlet/>

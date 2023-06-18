@@ -1,5 +1,6 @@
 import React from 'react';
 import IncidenciaAsignada from '../template/IncidenciaAsignada';
+import IncidenciaAsignadaGrupo from '../template/IncidenciaAsignadaGrupo';
 
 const IncidenciaGrupo = () => {
     return (
@@ -27,7 +28,7 @@ const IncidenciaGrupo = () => {
                     </thead>
 
                     <tbody>
-                        <IncidenciaAsignada></IncidenciaAsignada>
+                        <IncidenciaAsignadaGrupo></IncidenciaAsignadaGrupo>
                     </tbody>
 
                 </table>

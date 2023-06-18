@@ -14,6 +14,19 @@ const Rol = () => {
             description: description
         }
        await axios.post(`http://localhost:4000/roles/`, body)
+       .then((res)=>{
+        if(res.data.response){
+
+            alert(res.data.response)
+        }else{
+            alert("Rol Creado Exitosamente")
+        }
+            
+        }
+         
+       )
+       .catch((error)=> {alert(error)})
+    
     }
     return (
         <div className='bg-gray-900 w-2/3  justify-center items-center p-10 rounded-2xl mt-24'>

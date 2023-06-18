@@ -34,6 +34,19 @@ const Usuario = () => {
             assignmentGroupId: idArea.current.value
         }
        await axios.post(`http://localhost:4000/users/`, body)
+       .then((res)=>{
+        if(res.data.response){
+
+            alert(res.data.response)
+        }else{
+            alert("Usuario Creado Exitosamente")
+        }
+            
+        }
+         
+       )
+       .catch((error)=> {alert('Usuario no creado ${error}')})
+      
     }
 
     const getAllRoles = () => {

@@ -1,9 +1,31 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import {Link} from "react-router-dom"
+import { GetDetailsUser } from '../services/AxiosUser';
 const Navbar = () => {
+    const [Name, setName] = useState("")
+    const [lastname, setlastname] = useState("");
+    const id = localStorage.getItem("Id")
+    const idINT = parseInt(id) 
+
+    useEffect(() => {
+        GetUserId(idINT)
+    }, []);   
+     const GetUserId =  (id)=>{
+
+        GetDetailsUser(id)
+        .then((res)=>{
+            let data = res.data
+            let Nombre = data.name
+            let lastname = data.lastname
+            setName(Nombre)
+            setlastname(lastname)
+        })
+    }
 
     const LogOut = ()=>{
-        localStorage.removeItem("TOKEN")
+        localStorage.clear()
+        
         setInterval(window.location.reload(), 500  );
         }
     return (
@@ -11,6 +33,7 @@ const Navbar = () => {
         <nav className='flex lg:w-full justify-between items-center h-16 lg:h-14 '>
         <div className='ml-6 '><img src='https://s3.amazonaws.com/media.greatplacetowork.com/peru/best-workplaces-for-millennials-in-peru/2021/scotiabank/logo.png' className='w-44'></img></div>
         <div className='hidden lg:flex'>
+            <h2 className='text-sky-100 text-2xl'>{Name} {lastname}</h2>
                 </div>
                 <div> <button onClick={()=>LogOut()} className='mr-3'>Cerrar sesion</button></div>
         </nav>

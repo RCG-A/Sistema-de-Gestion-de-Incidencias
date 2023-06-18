@@ -13,6 +13,19 @@ const Categoria = () => {
             description: description
         }
         await axios.post("http://localhost:4000/categories", body)
+        .then((res)=>{
+            if(res.data.response){
+    
+                alert(res.data.response)
+            }else{
+                alert("Categoria Creada Exitosamente")
+            }
+                
+            }
+             
+           )
+           .catch((error)=> {alert(error)})
+        
     }
     
 
