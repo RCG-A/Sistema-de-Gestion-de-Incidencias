@@ -3,7 +3,7 @@ import axios from 'axios';
 import { GetArea } from '../../services/AxiosArea';
 import { GetAllCategories, GetAllSubCategories1, GetAllSubCategories2 } from '../../services/AxiosCategories';
 import { GetUser } from '../../services/AxiosUser';
-import { useParams } from 'react-router-dom';
+import { Navigate, redirect, useParams } from 'react-router-dom';
 
 
 const EditIncidencia = () => {
@@ -43,6 +43,7 @@ const EditIncidencia = () => {
     const [subcategories1Default, setsubcategories1Default] = useState(null)
     const [subcategories2Default, setsubcategories2Default] = useState(null)
     const [brebe, setbrebe] = useState("")
+    const [cerrarIncidencia, setCerrarIncidencia] = useState(false)
     const GetIncidencia = async ()=>{
         const response = await axios.get(`http://localhost:4000/incidents/`+id) 
         setnumTK(response.data.numTK),
@@ -85,10 +86,11 @@ const EditIncidencia = () => {
             assignedUserId: assignedUserId.current.value,
             briefDescription: briefDescription,
             description: description,
-            historic: "historic"
+            historic: cerrarIncidencia
         }
         await axios.patch(`http://localhost:4000/incidents/`+id, body)
-    }
+        alert("Incidencia actualizada")
+        }
 
     /// OBTENCION DE DATOS
     const [users, setusers] = useState([])
@@ -158,7 +160,10 @@ const EditIncidencia = () => {
             })
     }
 
-
+    const cerrar = ()=>{
+        setCerrarIncidencia(!cerrarIncidencia)
+        console.log(cerrarIncidencia);
+    }
 
     return (
         <div className='bg-gray-900  justify-center items-center p-5'>
@@ -239,8 +244,8 @@ const EditIncidencia = () => {
                     </div>
                 </div>
                 <div className='items-center'>
-                    <label className='text-cyan-50 text-lg'>Historico</label>
-                    <input placeholder=''></input>
+                    <label className='text-cyan-50 text-lg'>Terminar incidencia</label>
+                    <input type='checkbox' className='scale-150 ml-2' onClick={()=>cerrar()}></input>
                 </div>
                 <button type='submit' className='bg-white mt-2 hover:bg-stone-50'>Actualizar Incidencia</button>
             </form>

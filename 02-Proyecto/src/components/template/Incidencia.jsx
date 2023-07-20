@@ -3,6 +3,7 @@ import axios from 'axios';
 import { GetArea } from '../../services/AxiosArea';
 import { GetAllCategories, GetAllSubCategories1, GetAllSubCategories2 } from '../../services/AxiosCategories';
 import { GetUser } from '../../services/AxiosUser';
+import emailjs from '@emailjs/browser';
 
 const Incidencia = () => {
 
@@ -59,6 +60,7 @@ const Incidencia = () => {
             historic: "historic"
         }
         await axios.post("http://localhost:4000/incidents/", body)
+        alert("Incidencia creada")
     }
 
     /// OBTENCION DE DATOS
@@ -127,10 +129,11 @@ const Incidencia = () => {
 
 
 
+
     return (
         <div className='bg-gray-900  justify-center items-center p-5'>
             <h2 className='text-zinc-50 text-4xl justify-center mb-5'>Incidencia</h2>
-            <form onSubmit={createIncidencia}>
+            <form  onSubmit={createIncidencia}>
                 <div className='flex'>
                     <div className='items-center mr-4'>
                         <label className='text-cyan-50 text-lg'>#TKT</label>
@@ -174,7 +177,7 @@ const Incidencia = () => {
                         </select>  </div>
                     <div className='items-center'>
                     <label className='text-cyan-50 text-lg'>Usuario Solicitante</label>
-                        <select className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={userID}>
+                        <select className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={userID} name='user_email'>
                             {users.map((users, i) => (
                                 <option key={i} USER={() => GetUser(users.id)} value={users.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
                                 {users.name} {users.role.name}  {users.email} 
@@ -190,7 +193,7 @@ const Incidencia = () => {
                             ))}
                         </select>
                         <label className='text-cyan-50 text-lg'>Usuario asignado</label>
-                        <select className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={assignedUserId}>
+                        <select className='w-11/12 border-2 rounded-lg p-1 m-2 bg-transparent text-cyan-50' ref={assignedUserId} name='user_name'>
                             {users.map((users, i) => (
                                 <option key={i} USER={() => GetUser(users.id)} value={users.id} className='w-full border-2 rounded-lg p-1.5 m-2 bg-transparent text-black' >
                                     {users.name} {users.role.name}  {users.email} 
@@ -201,14 +204,10 @@ const Incidencia = () => {
                         <input value={briefDescription} onChange={(e)=> setbriefDescription(e.target.value)} placeholder='Brebe descripcion' type='text' className='w-11/12 border-2 rounded-lg  m-2 bg-transparent pl-2 text-cyan-50' />
                       
                         <label className='text-cyan-50 text-lg'>Descripcion</label>
-                        <textarea value={description} onChange={(e)=> setdescription(e.target.value)} placeholder='Descripcion' type='text' className='w-11/12 border-2 rounded-lg m-2 bg-transparent pl-2 text-cyan-50' ></textarea>
+                        <textarea name='message' value={description} onChange={(e)=> setdescription(e.target.value)} placeholder='Descripcion' type='text' className='w-11/12 border-2 rounded-lg m-2 bg-transparent pl-2 text-cyan-50' ></textarea>
                     </div>
                 </div>
-                <div className='items-center'>
-                    <label className='text-cyan-50 text-lg'>Historico</label>
-                    <input placeholder=''></input>
-                </div>
-                <button type='submit' className='bg-white mt-2 hover:bg-stone-50'>Crear Incidencia</button>
+                <button type='submit' className='bg-white mt-2 hover:bg-stone-50' onClick={()=>sendEmail()}>Crear Incidencia</button>
             </form>
 
         </div>

@@ -19,6 +19,8 @@ import EditIncidencia from './components/template/EditIncidencia'
 import IncidenciaE from './components/container/Editar-Incidencia'
 import { GetDetailsUser } from './services/AxiosUser'
 import ErrorPage from './pages/ErrorPage'
+import { PDFViewer } from '@react-pdf/renderer';
+
 const App = () => {
 
 
@@ -30,8 +32,8 @@ const App = () => {
   function Rutas() {
     switch (idINT) {
       case 1:
-        return (  <Routes>
-          <Route            element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
+        return (<Routes>
+          <Route element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
             <Route path='/home' element={<Home></Home>}></Route>
             <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
             <Route path='/incidencia-asignada-a-mi' element={<IncidenciasLista></IncidenciasLista>}></Route>
@@ -41,6 +43,8 @@ const App = () => {
             <Route path='/crear-area' element={<CrearArea></CrearArea>}></Route>
             <Route path='/crear-categoria' element={<CrearCategoria></CrearCategoria>}></Route>
             <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
+
+            <Route element={<ErrorPage></ErrorPage>} path='/pdfs-1'></Route>
           </Route>
           <Route
             element={<RouteProteccion isAllow={!localStorage.getItem("TOKEN")} redirectTo='/crear-incidencia' />} >
@@ -50,17 +54,13 @@ const App = () => {
         </Routes>)
         break;
       case 2:
-        return (  <Routes>
-
-
-          <Route            element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
-      
-            
+        return (
+        <Routes>
+          <Route element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
             <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
             <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
+            <Route element={<ErrorPage></ErrorPage>} path='/pdfs-1'></Route>
           </Route>
-
-
           <Route
             element={<RouteProteccion isAllow={!localStorage.getItem("TOKEN")} redirectTo='/crear-incidencia' />} >
             <Route path='/' element={<LoginPage></LoginPage>}></Route>
@@ -69,16 +69,18 @@ const App = () => {
         </Routes>)
         break;
       case 3:
-        return (  <Routes>
+        return (<Routes>
 
 
           <Route
             element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
-      
+
             <Route path='/home' element={<Home></Home>}></Route>
             <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
             <Route path='/incidencia-asignada-a-mi-grupo' element={<IncidenciaGrupo></IncidenciaGrupo>}></Route>
             <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
+
+            <Route element={<ErrorPage></ErrorPage>} path='/pdfs-1'></Route>
           </Route>
 
 
@@ -90,16 +92,18 @@ const App = () => {
         </Routes>)
         break;
       case 4:
-        return (  <Routes>
+        return (<Routes>
 
 
-          <Route            element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
-      
+          <Route element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
+
             <Route path='/home' element={<Home></Home>}></Route>
             <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
             <Route path='/incidencia-asignada-a-mi' element={<IncidenciasLista></IncidenciasLista>}></Route>
             <Route path='/incidencia-asignada-a-mi-grupo' element={<IncidenciaGrupo></IncidenciaGrupo>}></Route>
             <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
+
+            <Route element={<ErrorPage></ErrorPage>} path='/pdfs-1'></Route>
           </Route>
 
 
@@ -111,17 +115,23 @@ const App = () => {
         </Routes>)
         break;
       default:
-        return (  <Routes>
+        return (<Routes>
 
 
-          <Route 
-          element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
-      
+          <Route
+            element={<RouteProteccion isAllow={localStorage.getItem("TOKEN")} redirectTo='/' />} >
+
             <Route path='/home' element={<Home></Home>}></Route>
             <Route path='/crear-incidencia' element={<IncidenciaC></IncidenciaC>}></Route>
             <Route path='/incidencia-asignada-a-mi' element={<IncidenciasLista></IncidenciasLista>}></Route>
             <Route path='/incidencia-asignada-a-mi-grupo' element={<IncidenciaGrupo></IncidenciaGrupo>}></Route>
+            <Route path='/crear-usuario' element={<CrearUsuario></CrearUsuario>}></Route>
+            <Route path='/crear-rol' element={<CrearRol></CrearRol>}></Route>
+            <Route path='/crear-area' element={<CrearArea></CrearArea>}></Route>
+            <Route path='/crear-categoria' element={<CrearCategoria></CrearCategoria>}></Route>
             <Route path='/incidents/:id' element={<IncidenciaE></IncidenciaE>}></Route>
+
+            <Route element={<ErrorPage></ErrorPage>} path='/pdfs'></Route>
           </Route>
 
 
@@ -148,9 +158,8 @@ const App = () => {
 
           {localStorage.getItem("TOKEN") ? (<Sidebar></Sidebar>) : (<></>)}
 
-         {Rutas()}
+          {Rutas()}
         </div>
-        
       </Router>
     </>
   )

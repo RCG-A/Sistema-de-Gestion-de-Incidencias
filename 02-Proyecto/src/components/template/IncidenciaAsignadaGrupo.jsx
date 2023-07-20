@@ -37,6 +37,7 @@ const IncidenciaAsignadaGrupo = () => {
         <>
             {Incidencia
             .filter(Incidencia => Incidencia.assignmentGroupId == localStorage.getItem("assignmentGroupId"))
+            .filter(Incidencia => Incidencia.historic == false)
             .map((Incidencia, index) =>
             (
                 
