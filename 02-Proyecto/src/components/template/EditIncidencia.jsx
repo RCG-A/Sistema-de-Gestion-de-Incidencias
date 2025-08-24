@@ -88,7 +88,7 @@ const EditIncidencia = () => {
             description: description,
             historic: cerrarIncidencia
         }
-        await axios.patch(`http://localhost:4000/incidents/`+id, body)
+        await axios.patch(`http://192.168.0.106:4000/incidents/`+id, body)
         alert("Incidencia actualizada")
         }
 

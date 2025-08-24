@@ -8,16 +8,16 @@ export const CreateUser = (idCategory,name, description)=>{
         description: description
     
     }
-    return axios.post("http://localhost:4000/users", body)
+    return axios.post("http://192.168.0.106:4000/users", body)
 }
 
 export const GetUser = () => {
-    return axios.get("http://localhost:4000/users")
+    return axios.get("http://192.168.0.106:4000/users")
 
 }
 
 export const GetDetailsUser = (id)=>{
-    return axios.get(`http://localhost:4000/users/${id}`)
+    return axios.get(`http://192.168.0.106:4000/users/${id}`)
 }
 
 
@@ -28,5 +28,5 @@ export const EditUser = (idCategory,name, description, id)=>{
         description: description
         
     }
-    return axios.patch(`http://localhost:4000/users/${id}`, body)
+    return axios.patch(`http://192.168.0.106:4000/users/${id}`, body)
 }

@@ -12,7 +12,7 @@ const Area = () => {
             name: name,
             description: description
         }
-       await axios.post(`http://localhost:4000/assignment-group/`, body)
+       await axios.post(`http://192.168.0.106:4000/assignment-group/`, body)
        .then((res)=>{
         if(res.data.response){
 

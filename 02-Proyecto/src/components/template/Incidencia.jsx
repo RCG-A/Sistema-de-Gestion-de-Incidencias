@@ -59,7 +59,7 @@ const Incidencia = () => {
             description: description,
             historic: "historic"
         }
-        await axios.post("http://localhost:4000/incidents/", body)
+        await axios.post("http://192.168.0.106:4000/incidents/", body)
         alert("Incidencia creada")
     }
 

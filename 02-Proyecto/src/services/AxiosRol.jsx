@@ -5,16 +5,16 @@ export const CreateRole = (name, description)=>{
         name: name,
         description: description
     }
-    return axios.post("http://localhost:4000/roles", body)
+    return axios.post("http://192.168.0.106:4000/roles", body)
 }
 
 export const GetRole = () => {
-    return axios.get("http://localhost:4000/roles")
+    return axios.get("http://192.168.0.106:4000/roles")
 
 }
 
 export const GetDetailsRole = (id)=>{
-    return axios.get(`http://localhost:4000/roles/${id}`)
+    return axios.get(`http://192.168.0.106:4000/roles/${id}`)
 }
 
 
@@ -24,5 +24,5 @@ export const EditRole = (name, description, id)=>{
         description: description,
         
     }
-    return axios.patch(`http://localhost:4000/roles/${id}`, body)
+    return axios.patch(`http://192.168.0.106:4000/roles/${id}`, body)
 }

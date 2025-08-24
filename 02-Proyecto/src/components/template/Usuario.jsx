@@ -33,7 +33,7 @@ const Usuario = () => {
             roleId: idRol.current.value,
             assignmentGroupId: idArea.current.value
         }
-       await axios.post(`http://localhost:4000/users/`, body)
+       await axios.post(`http://192.168.0.106:4000/users/`, body)
        .then((res)=>{
         if(res.data.response){
 

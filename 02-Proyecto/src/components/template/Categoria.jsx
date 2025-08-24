@@ -12,7 +12,7 @@ const Categoria = () => {
             name: name,
             description: description
         }
-        await axios.post("http://localhost:4000/categories", body)
+        await axios.post("http://192.168.0.106:4000/categories", body)
         .then((res)=>{
             if(res.data.response){
     

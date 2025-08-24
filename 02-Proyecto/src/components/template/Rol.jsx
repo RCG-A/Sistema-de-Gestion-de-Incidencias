@@ -13,7 +13,7 @@ const Rol = () => {
             name: name,
             description: description
         }
-       await axios.post(`http://localhost:4000/roles/`, body)
+       await axios.post(`http://192.168.0.106:4000/roles/`, body)
        .then((res)=>{
         if(res.data.response){
 
