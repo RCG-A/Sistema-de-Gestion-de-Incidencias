@@ -35,7 +35,7 @@ const Navbar = () => {
         <div className='hidden lg:flex'>
             <h2 className='text-sky-100 text-2xl'>{Name} {lastname}</h2>
                 </div>
-                <div>  <button onClick={()=>LogOut()} className='mr-3'>LogOut</button></div>
+                <div>  <button onClick={()=>LogOut()} className='mr-3'>Log Out</button></div>
         </nav>
         </header>
     );
